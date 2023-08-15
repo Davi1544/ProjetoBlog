@@ -34,7 +34,5 @@
     $instrucao = select ($entidade, $campos, $criterio); 
     echo $instrucao. '<BR>';
     // Teste geração DELETE
-    $instrucao = delete ($entidade, $criterio);
-    echo $instrucao. '<BR>';
 
 ?>
