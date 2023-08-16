@@ -2,8 +2,8 @@
     function conecta(): mysqli
     {
         $servidor = 'localhost';
-        $banco = 'projetoblog';
-        $port = 3307;
+        $banco = 'blog';
+        $port = 3306;
         $usuario = 'root';
         $senha = '';
     

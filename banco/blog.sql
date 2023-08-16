@@ -1,5 +1,4 @@
-delete if exists ProjetoBlog;
-create database ProjetoBlog;
+create database blog;
 use ProjetoBlog;
 
 CREATE TABLE usuario (

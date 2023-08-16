@@ -17,10 +17,10 @@ CREATE TABLE avaliacao (
     require_once '../core/sql.php';
     require_once '../core/mysql.php';
 
-    //insert_teste ('Que porra meu', 2, 1, 1, 'now()'); 
-    buscar_teste(2);
-    update_teste (2, 'Não ficou legal', 34, 1, 1, 'now()'); 
-    delete_teste(2);
+    insert_teste ('Que meu', 2, 1, 2, 'now()'); 
+    buscar_teste(44);
+    update_teste (44, 'Não ficou legal', 34, 1, 2, 'now()'); 
+    //delete_teste(2);
     /*
     update_teste (2, 'murilo', 'silva@gmail.com'); 
     buscar_teste();*/
