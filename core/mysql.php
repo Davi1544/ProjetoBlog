@@ -145,7 +145,7 @@ function buscar (string $entidade, array $campos = ['*'], array $criterio = [], 
 
     foreach ($criterio as $expressao) {
 
-        $dado = $expressao [count ($expressao) -1];
+        $dado = $expressao [count ($expressao) - 1];
         $tipo[] = gettype ($dado)[0];
         $expressao [count ($expressao) - 1] = '?';
         $coringa_criterio[] = $expressao;
@@ -159,7 +159,7 @@ function buscar (string $entidade, array $campos = ['*'], array $criterio = [], 
         $campos_criterio[] = $nome_campo;
 
         $$nome_campo = $dado;
-    
+        
     }
     
     $instrucao = select ($entidade, $campos, $coringa_criterio, $ordem);
@@ -170,10 +170,11 @@ function buscar (string $entidade, array $campos = ['*'], array $criterio = [], 
     if (isset($tipo)) {
 
         $comando = 'mysqli_stmt_bind_param($stmt, '; 
-        $comando.= "'" .implode('', $tipo). "'";
+        $comando.= "'". implode('', $tipo). "'";
         $comando.= ', $'. implode(', $', $campos_criterio);
         $comando.= ');';
-        
+
+
         eval ($comando);
     }
 

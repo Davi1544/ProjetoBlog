@@ -1,5 +1,5 @@
 create database blog;
-use ProjetoBlog;
+use blog;
 
 CREATE TABLE usuario (
     id int NOT NULL AUTO_INCREMENT,
