@@ -21,36 +21,27 @@
                     <form method="post" action="core/usuario_repositorio.php">
                         <input type="hidden" name="acao" value="login">
                         <div class="form-group">
-?>                        
+                         <label for="email">E-mail</label>
+                            <input class="form-control" type="text"
+                                require="required" id="email" name="email">
                         </div>
                         <div class="form-group">
-
+                            <label for="senha">Senha</label>
+                            <input class="form-control" type="password" require="required" id="senha" name="senha">
                         </div>
+                        <div class="text-right">
+                            <button class="btn btn-success"
+                                type="submit">Acessar</button>
                         </div>
                     </form>
-                
                 </div>
-    
-    
-    <?php
-    
-    </div>
-    <div class="row">
-    <label for="email">E-mail</label>
-    <input class="form-control" type="text"
-    </div>
-    
-    require="required" id="email" name="email">
-    <label for="senha">Senha</label>
-    <input class="form-control" type="password"
-    </div>
-    <div class="text-right">
-    </div>
-    require="required" id="senha" name="senha":
-    <div class="col-md-12">
-    <button class="btn btn-success"
-    type="submit">Acessar</button>
-    include 'includes/rodape.php';
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php include 'includes/rodape.php'; ?>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="lib/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
 </body>
