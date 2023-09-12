@@ -33,7 +33,7 @@ function update (string $entidade, array $dados, array $criterio = []): string{
 
 function delete (string $entidade, array $criterio = []) : string{
 
-    $instrucao = "DELETE /*FROM*/ {$entidade}";
+    $instrucao = "DELETE FROM {$entidade}";
 
     if (!empty($criterio)){
 
@@ -43,6 +43,7 @@ function delete (string $entidade, array $criterio = []) : string{
             $instrucao .= ' ' . implode(' ', $expressao);
         }
     }
+
     return $instrucao; 
 }
 

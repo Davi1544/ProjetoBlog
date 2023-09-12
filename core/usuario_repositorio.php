@@ -4,7 +4,7 @@
     require_once 'conexao_mysql.php';
     require_once 'sql.php';
     require_once 'mysql.php';
-    $salt = '$exemplosaltifsp';
+    $salt = 'ifsp';
 
     foreach ($_POST as $indice => $dado) {
         $$indice = limparDados($dado);
@@ -31,7 +31,7 @@
         
         case 'update':
 
-            $id = (int) $id;
+            $id = (int)$id;
 
             $dados = [
                 'nome'=> $nome,
@@ -87,12 +87,13 @@
 
         case 'status':
 
-            $id = (int) $id;
-            $valor = (int) $valor;
+            $id = (int)$id;
+            $valor = (int)$valor;
 
             $dados = [
                 'ativo' => $valor
             ];
+
             $criterio = [
                 ['id', '=', $id]
             ];
@@ -119,12 +120,12 @@
             ];
             
 
-            $criterio [
+            $criterio = [
                 ['id', '=', $id] 
             ];
             
             
-            atualiza (
+            atualiza(
                 'usuario',
                 $dados,
                 $criterio
@@ -137,7 +138,7 @@
             break;          
     }
 
-    header('Location: ../index.php');           
+    //header('Location: ../index.php');           
             
             
         

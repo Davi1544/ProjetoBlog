@@ -73,6 +73,8 @@ function atualiza (string $entidade, array $dados, array $criterio = []) : bool
         $comando .= ', $' . implode(', $', $campos_criterio);
         $comando .= ');';
 
+        echo $comando;
+
         eval($comando);
     }
 
@@ -106,11 +108,11 @@ function deleta (string $entidade, array $criterio = []) : bool
 
         $campos_criterio[] = $nome_campo;
 
-        $$nome_campo = $dado;  // usa o valor do nome do campo como nome de uma variável
+        $$nome_campo = $dado; // usa o valor do nome do campo como nome de uma variável
     }
 
-    $instrucao = delete ($entidade, $coringa_criterio);
-
+    $instrucao = delete($entidade, $coringa_criterio);
+    echo $instrucao;
     $conexao = conecta();
 
     $stmt = mysqli_prepare ($conexao, $instrucao);
@@ -120,7 +122,7 @@ function deleta (string $entidade, array $criterio = []) : bool
         $comando .= "'". implode('', $tipo) ."'";
         $comando .= ', $'.implode(', $', $campos_criterio);
         $comando .= ');';
-        
+
         eval ($comando); // transforma string em php
     }
 

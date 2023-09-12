@@ -56,9 +56,11 @@
             break;
 
         case 'delete':
+
             $criterio = [
                 ['id', '=', $id]
             ];
+
 
             deleta (
                 'post',
