@@ -13,6 +13,8 @@ CREATE TABLE usuario (
     PRIMARY KEY (id)
 );
 
+insert into usuario values (1,'Davi', 'admin@gmail.com', '1234', now(), 1, 1);
+
 CREATE TABLE post (
     id int NOT NULL AUTO_INCREMENT,
     titulo varchar(255) NOT NULL,
