@@ -22,6 +22,7 @@
                 </div>
                 <div class="col-md-10" style="padding-top: 50px;">
                 <?php
+                date_default_timezone_set('America/Sao_Paulo');
                     require_once 'includes/funcoes.php';
                     require_once 'core/conexao_mysql.php';
                     require_once 'core/sql.php';
@@ -30,24 +31,32 @@
                         $$indice = limparDados ($dado);
                     }
 
-                        $user_id = $_SESSION['login']['usuario']['id'];
+                    $data_atual = date('Y-m-d H:i:s');
 
-                            if(!empty($id)){
-                                $id = (int)$id;
+                    $user_id = $_SESSION['login']['usuario']['id'];
 
-                                $criterio = [
-                                    ['id', '=', $id],
-                                    ['AND', 'usuario_id', '=', $user_id]
-                                ];
-                                $retorno = buscar(
-                                    'post',
-                                    ['*'],
-                                    $criterio
-                                );
-                                if(isset($retorno[0])){
-                                    $entidade = $retorno[0];
-                                }
+                        if(!empty($id)){
+                            $id = (int)$id;
+
+                            $criterio = [
+                                ['id', '=', $id],
+                                ['AND', 'usuario_id', '=', $user_id],
+                                ['AND', 'data_postagem', '>', $data_atual]
+                            ];
+
+                            $retorno = buscar(
+                                'post',
+                                ['*'],
+                                $criterio
+                            );
+                            if(isset($retorno[0]) && isset($id)){
+                                $entidade = $retorno[0];
+
+                            }else if(!isset($retorno[0]) && isset($id)){
+                                header('Location: index.php');
                             }
+                        }
+                        
                         ?>
                         <h2>Post</h2>
                         <form method="post" action="core/post_repositorio.php">

@@ -48,7 +48,7 @@
                 if (!empty($busca)) {
                     $criterio[] = [
                         'AND',
-                        'texto',
+                        'titulo',
                         'like',
                         "%{$busca}%"
                     ];
@@ -82,21 +82,99 @@
                                 $data = date_create($post['data_postagem']); 
                                 $data = date_format($data, 'd/m/Y H:i:s');             
                         ?>
-                        <a class="list-group-item list-group-item-action"
+                        <div class="row" style='padding-left: 15px'>
+                            <a class="list-group-item list-group-item-action col-8"
                             href="post_detalhe.php?post=<?php echo $post['id']?>">
                             <strong><?php echo $post['titulo']?></strong> [<?php echo $post['nome']?>]
                             <span class="badge badge-dark"><?php echo $data?></span> </a>
 
                             <?php if(isset($_SESSION['login']['usuario']['id']) && $_SESSION['login']['usuario']['id'] == $post['dono']):?>
 
-                                <form action="core/post_repositorio.php" method="post">
+                                <form action="core/post_repositorio.php" method="post" class='col-2'>
                                     <input type="hidden" name="acao" value="delete">
                                     <input type="hidden" name="id" value="<?php echo $post['id'];?>">
-                                    <input type="submit" value="Deletar">
+                                    <input type="submit" class="btn btn-danger" value="Deletar">
                                 </form>
 
                             <?php endif;?>
 
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php
+                date_default_timezone_set('America/Sao_Paulo');
+                require_once 'includes/funcoes.php'; 
+                require_once 'core/conexao_mysql.php';
+                require_once 'core/sql.php';
+                require_once 'core/mysql.php';
+
+                foreach ($_GET as $indice => $dado) { 
+                    $$indice = limparDados ($dado);
+                }
+
+                $data_atual = date('Y-m-d H:i:s');
+                $criterio = [
+                    ['data_postagem', '>', $data_atual]
+                ];
+
+                if (!empty($busca)) {
+                    $criterio[] = [
+                        'AND',
+                        'titulo',
+                        'like',
+                        "%{$busca}%"
+                    ];
+                }
+
+                $posts = buscar (
+
+                    'post',
+
+                    [
+                        'titulo',
+                        'data_postagem',
+                        'id',
+                        'usuario_id as dono',
+                        '(select nome
+                        from usuario
+                        where usuario.id = post.usuario_id) as nome'
+                        
+                    ],
+
+                    $criterio,
+                    'data_postagem DESC'
+                );
+            ?>
+
+
+                <div>
+                    <div class="list-group">
+                        <?php
+                            foreach ($posts as $post):
+                                $data = date_create($post['data_postagem']); 
+                                $data = date_format($data, 'd/m/Y H:i:s');             
+                        ?>
+                        <div class="row" style='padding-left: 15px'>
+                            <a class="list-group-item list-group-item-action col-8"
+                            href="post_detalhe.php?post=<?php echo $post['id']?>">
+                            <strong><?php echo $post['titulo']?></strong> [<?php echo $post['nome']?>]
+                            <span class="badge badge-dark"><?php echo $data?></span> </a>
+
+                            <?php if(isset($_SESSION['login']['usuario']['id']) && $_SESSION['login']['usuario']['id'] == $post['dono']):?>
+
+                                <form action="core/post_repositorio.php" method="post" class='col-2'>
+                                    <input type="hidden" name="acao" value="delete">
+                                    <input type="hidden" name="id" value="<?php echo $post['id'];?>">
+                                    <input type="submit" class="btn btn-danger" value="Deletar">
+                                </form>
+                                <a href="post_formulario.php?id=<?php echo  $post['id']?>">
+                                    <button class="btn btn-primary">Editar</button>
+                                </a>
+
+                            <?php endif;?>
+
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>

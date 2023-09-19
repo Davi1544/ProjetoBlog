@@ -112,7 +112,7 @@ function deleta (string $entidade, array $criterio = []) : bool
     }
 
     $instrucao = delete($entidade, $coringa_criterio);
-    echo $instrucao;
+
     $conexao = conecta();
 
     $stmt = mysqli_prepare ($conexao, $instrucao);
