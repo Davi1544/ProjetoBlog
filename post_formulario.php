@@ -30,18 +30,23 @@
                         $$indice = limparDados ($dado);
                     }
 
+                        $user_id = $_SESSION['login']['usuario']['id'];
+
                             if(!empty($id)){
                                 $id = (int)$id;
 
                                 $criterio = [
-                                    ['id', '=', $id]
+                                    ['id', '=', $id],
+                                    ['AND', 'usuario_id', '=', $user_id]
                                 ];
                                 $retorno = buscar(
                                     'post',
                                     ['*'],
                                     $criterio
                                 );
-                                $entidade = $retorno[0];
+                                if(isset($retorno[0])){
+                                    $entidade = $retorno[0];
+                                }
                             }
                         ?>
                         <h2>Post</h2>
